@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { menu, close, logo } from "../assets";
+// import React, { useState } from "react";
+// import { menu, close, logo } from "../assets";
+import { logo } from "../assets";
 
 const Navbar = () => {
-  const [toggle, setTogggle] = useState(false);
-  const handleClick = () => setTogggle(!toggle);
+  // const [toggle, setTogggle] = useState(false);
+  // const handleClick = () => setTogggle(!toggle);
 
   return (
     <div className="w-full h-[80px] z-10 bg-white fixed drop-shadow-lg relative">

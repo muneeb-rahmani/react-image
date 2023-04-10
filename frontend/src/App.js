@@ -1,14 +1,14 @@
+import AllPageContent from "./components/AllPageContent";
 import Navbar from "./components/Navbar";
-import PostData from "./pages/PostData";
-// import ImageList from "./pages/ImageList";
+
+
 
 function App() {
   return (
 
     <>
-    <Navbar />
-    {/* <ImageList /> */}
-    <PostData />
+      <Navbar />
+      <AllPageContent />
     </>
 
   );
