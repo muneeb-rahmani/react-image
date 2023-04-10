@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "img_lists",
+  "info": {
+    "singularName": "img-list",
+    "pluralName": "img-lists",
+    "displayName": "imgList",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "imgTitle": {
+      "type": "string",
+      "required": true
+    },
+    "imgContent": {
+      "type": "richtext",
+      "required": true
+    },
+    "imgDownload": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
