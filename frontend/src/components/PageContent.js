@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const PageContent = () => {
   const { id } = useParams();
@@ -25,31 +25,32 @@ const PageContent = () => {
 
   
   return (
-    <section class="text-gray-600 body-font overflow-hidden">
-      <div class="container px-5 py-24 mx-auto">
+    <section className="text-gray-600 body-font overflow-hidden">
+      <div className="container px-5 py-24 mx-auto">
         {imgItem && (
-          <div class="lg:w-4/5 mx-auto flex flex-wrap">
+          <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
-              class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src={`http://localhost:1337${imgItem.data.attributes.imgDownload.data.attributes.url}`}
+              className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+              // src={`http://localhost:1337${imgItem.data.attributes.imgDownload.data.attributes.url}`}
+              src={`http://localhost:1337${imgItem?.data?.attributes?.imgDownload?.data?.[0]?.attributes?.url}`}
               alt={imgItem.imgTitle}
             />
 
-            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-              <h2 class="text-sm title-font text-gray-500 tracking-widest">
+            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+              <h2 className="text-sm title-font text-gray-500 tracking-widest">
                 Vector
               </h2>
-              <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-                {imgItem.data.attributes?.imgTitle}
+              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+                {imgItem?.data.attributes?.imgTitle}
               </h1>
-              <div class="flex mb-4">
+              <div className="flex mb-4">
                 <ReactMarkdown className="line-break">
                   {imgItem.data.attributes?.imgContent}
                 </ReactMarkdown>
               </div>
-              <div class="flex">
-                <a className="w-full" href={`http://localhost:1337${imgItem.data.attributes.imgDownload.data.attributes.url}`} download>
-                  <button class="flex w-full items-center justify-center text-white bg-indigo-500 border-0 my-8 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+              <div className="flex">
+                <a className="w-full" href={`http://localhost:1337${imgItem?.data?.attributes?.imgDownload?.data?.attributes?.url}`} download>
+                  <button className="flex w-full items-center justify-center text-white bg-indigo-500 border-0 my-8 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                     Download
                   </button>
                 </a>
@@ -61,21 +62,6 @@ const PageContent = () => {
       </div>
     </section>
 
-    // <div className='w-full pb-10 bg-[#f9f9f9]'>
-    //   <div className='max-w-[1240px] mx-auto'>
-    //     {imgItem && (
-    //       <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1
-    //         md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
-    //         <div className='col-span-2'>
-    //           <h1 className='font-bold text-2xl my-1 pt-5'>{imgItem.data.attributes?.imgTitle}</h1>
-    //           <img className='h-full w-full object-cover' src={`http://localhost:1337${imgItem.data.attributes.imgDownload.data.attributes.url}`} alt={imgItem.imgTitle} />
-    //           <div className='pt-5'><ReactMarkdown className='line-break'>{imgItem.data.attributes?.imgContent}</ReactMarkdown></div>
-    //         </div>
-    //       </div>
-    //     )}
-    //   </div>
-
-    // </div>
   );
 };
 

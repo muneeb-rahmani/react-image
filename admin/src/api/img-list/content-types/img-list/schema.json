@@ -4,8 +4,7 @@
   "info": {
     "singularName": "img-list",
     "pluralName": "img-lists",
-    "displayName": "imgList",
-    "description": ""
+    "displayName": "ImgList"
   },
   "options": {
     "draftAndPublish": true
@@ -17,22 +16,18 @@
       "required": true
     },
     "imgContent": {
-      "type": "richtext",
-      "required": true
+      "type": "richtext"
     },
     "imgDownload": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ]
-    },
-    "favorite": {
-      "type": "boolean"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
     }
   }
 }

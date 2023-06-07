@@ -35,7 +35,8 @@ const AllPageContent = () => {
           {myData.map((post) => {
             const { id, attributes } = post;
             const { imgTitle, imgDownload } = attributes;
-            const { data: { attributes: { url } }  } = imgDownload;
+            const { data: [{ attributes: { url } }] } = imgDownload;
+
 
             return (
 
