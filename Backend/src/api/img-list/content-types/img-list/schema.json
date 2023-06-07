@@ -30,6 +30,9 @@
         "videos",
         "audios"
       ]
+    },
+    "favorite": {
+      "type": "boolean"
     }
   }
 }
