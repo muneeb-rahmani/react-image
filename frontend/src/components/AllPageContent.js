@@ -12,7 +12,7 @@ const AllPageContent = () => {
 
   const getApiData = async () => {
     try {
-      const res = await axios.get("http://localhost:1337/api/img-lists?populate=*");
+      const res = await axios.get("https://strapi-deployment-backend.onrender.com/api/img-lists?populate=*");
       
       // console.log(res.data.data)
       setMyData(res.data.data);
@@ -44,7 +44,7 @@ const AllPageContent = () => {
               <Link  key={id} to={`/post/${id}`}>
                   
                   <div className="bg-white rounded-xl overflow-hidden drop-shadow-md my-5">
-                    <img className="h-auto w-full object-cover" alt={imgTitle} src={`http://localhost:1337${url}`}/>   
+                    <img className="h-auto w-full object-cover" alt={imgTitle} src={url}/>   
                   </div>
               </Link>
             );
