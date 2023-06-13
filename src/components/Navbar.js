@@ -7,7 +7,7 @@ const Navbar = () => {
 
 
   return (
-    <header className="text-gray-600 body-font">
+    <header className="text-gray-600 body-font" style={{ boxShadow: '0px 5px 7px -3px rgba(0, 0, 0, 0.15)' }}>
   <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <Link to="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <img src={logo} alt="PSDEPS Logo" className="w-full h-10 p-2" />

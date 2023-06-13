@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import AllPageContent from "./components/AllPageContent";
+import ImageCard from "./components/ImageCard";
 import Navbar from "./components/Navbar";
-import PageContent from "./components/PageContent";
-import Home from "./components/Home";
+import ImageDetails from "./pages/ImageDetails";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -10,13 +10,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/all" element={<AllPageContent />} />
-        <Route path="/post/:id" element={<PageContent />} />
+        <Route path="/all" element={<ImageCard />} />
+        <Route path="/post/:id" element={<ImageDetails />} />
       </Routes>
-      {/* <Home /> */}
-      <AllPageContent />
     </>
   );
 }
-
+//ui kaha hai
 export default App;
