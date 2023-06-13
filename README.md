@@ -1,2 +1,2 @@
 # Live website
-Demo - https://react-image-omega.vercel.app/
+Demo - https://unsplash-clone-react-strapi.netlify.app/
