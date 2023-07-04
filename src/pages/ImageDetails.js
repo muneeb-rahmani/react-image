@@ -8,8 +8,54 @@ import LoadingScreen from "../components/LoadingScreen";
 const ImageDetails = () => {
   const { id } = useParams();
   const { imgItem, error } = useSingleData(id);
+  const [downloadUrl, setDownloadUrl] = useState("");
+  const [countdown, setCountdown] = useState(10);
 
+  useEffect(() => {
+    if (imgItem) {
+      const downloadUrl =
+        imgItem?.data?.attributes?.imgDownload?.data?.[0]?.attributes?.url;
+      setDownloadUrl(downloadUrl);
+    }
+  }, [imgItem]);
 
+  const startDownload = () => {
+    axios({
+      url: downloadUrl,
+      method: "GET",
+      responseType: "blob", // Important: responseType should be set to "blob"
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${imgItem?.data?.attributes?.imgDownload?.data?.[0]?.attributes?.name}`); // Set the desired file name
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
+
+  const handleDownload = () => {
+    // Disable the download button
+    const downloadButton = document.getElementById("downloadButton");
+    downloadButton.disabled = true;
+  
+    // Show "Download" initially
+    setCountdown(10);
+  
+    // Start the countdown after a delay
+    setTimeout(() => {
+      const countdownInterval = setInterval(() => {
+        setCountdown((prevCountdown) => {
+          if (prevCountdown === 1) {
+            clearInterval(countdownInterval);
+            startDownload();
+          }
+          return prevCountdown - 1;
+        });
+      }, 1000);
+    }, 1000); // Delay the start of the countdown by 1 second
+  };
+  
   if (error) {
     // Handle error
     return <p>Error: {error.message}</p>;
@@ -24,7 +70,6 @@ const ImageDetails = () => {
   const height = imgItem?.data?.attributes?.imgDownload?.data?.[0]?.attributes?.height;
 
   const output = `${width} x ${height}`;
-
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -53,42 +98,42 @@ const ImageDetails = () => {
               </div>
 
               {/* Image details in table */}
-              <div class="flex flex-col">
-                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                  <div class="inline-block min-w-[65%] py-2 sm:px-6 lg:px-8">
-                    <div class="overflow-hidden">
-                      <table class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
-                        <thead class="border-b font-medium dark:border-neutral-500">
+              <div className="flex flex-col">
+                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                  <div className="inline-block min-w-[65%] py-2 sm:px-6 lg:px-8">
+                    <div className="overflow-hidden">
+                      <table className="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+                        <thead className="border-b font-medium dark:border-neutral-500">
                           <tr>
                             <th
                               scope="col"
-                              class="border-r px-6 py-4 dark:border-neutral-500"
+                              className="border-r px-6 py-4 dark:border-neutral-500"
                             >
                               File type:
                             </th>
                             <th
                               scope="col"
-                              class="border-r px-6 py-4 dark:border-neutral-500"
+                              className="border-r px-6 py-4 dark:border-neutral-500"
                             >
                               {imgItem?.data?.attributes?.imgDownload?.data?.[0]?.attributes?.ext}
                             </th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="border-b dark:border-neutral-500">
-                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                          <tr className="border-b dark:border-neutral-500">
+                            <td className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                               File Size:
                             </td>
-                            <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                               {imgItem?.data?.attributes?.imgDownload?.data?.[0]?.attributes?.size}
                             </td>
                           </tr>
-                          <tr class="border-b dark:border-neutral-500">
-                            <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                          <tr className="border-b dark:border-neutral-500">
+                            <td className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                               Dimension:
                             </td>
-                            <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                             {output}
+                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                              {output}
                             </td>
                           </tr>
                         </tbody>
@@ -100,11 +145,13 @@ const ImageDetails = () => {
               {/* End of Image details in table */}
 
               <div className="flex">
-                <a className="w-full" href="#">
-                  <button className="flex w-full items-center justify-center text-white hover:text-white bg-indigo-500 border-0 my-8 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded">
-                    Download
-                  </button>
-                </a>
+                <button
+                  id="downloadButton"
+                  className="flex w-full items-center justify-center text-white hover:text-white bg-indigo-500 border-0 my-8 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded"
+                  onClick={handleDownload}
+                >
+                  {countdown === 10 ? "Download" : `Your download will start in ${countdown}`}
+                </button>
               </div>
             </div>
           </div>
